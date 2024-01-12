@@ -11,7 +11,6 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import ProgressiveFastImage from "@freakycoder/react-native-progressive-fast-image";
-import { RootStackParamList } from '@/navigator/Router';
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { navigate } from '@/utils/Utils';
 import EmptyView from '@/components/common/EmptyView';
@@ -27,22 +26,24 @@ const mapStateToProps = ({ videoResult }: RootState) => {
 };
 
 interface IProps {
-  route: RouteProp<RootStackParamList, 'VideoResultPage'>;
+  //route: RouteProp<RootStackParamList, 'VideoResultPage'>;
+  id: string;
 }
 
 function VideoResultPage(props: IProps) {
   const dispatch = useDispatch();
   const { refreshing, videoResultList } = useSelector(mapStateToProps, shallowEqual);
+  const { id } = props;
 
   useEffect(() => {
     dispatch({
       type: REFRESH_TYPE,
       payload: {
-        id: props.route.params.id,
+        id: id,
       },
     });
-  }, [dispatch, props.route.params.id]);
-
+  }, [dispatch, id]);
+  /*
   useFocusEffect(
     useCallback(() => {
       dispatch({
@@ -53,12 +54,12 @@ function VideoResultPage(props: IProps) {
       });
     }, [dispatch, props.route.params.id])
   )
-
+  */
   const onRefresh = () => {
     dispatch({
       type: REFRESH_TYPE,
       payload: {
-        id: props.route.params.id,
+        id: id,
       },
     });
   };
@@ -76,7 +77,7 @@ function VideoResultPage(props: IProps) {
       <TouchableWithoutFeedback onPress={() => go2WebViewPage(item)}>
         <View style={styles.container}>
           <ProgressiveFastImage source={{ uri: item.cover }} style={styles.image} />
-          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.title} numberOfLines={3}>{item.title}</Text>
         </View>
       </TouchableWithoutFeedback>
     );

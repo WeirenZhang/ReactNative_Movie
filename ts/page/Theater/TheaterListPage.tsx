@@ -51,7 +51,7 @@ class TheaterListPage extends React.Component<IProps> {
         return (
             <FlatList
                 style={styles.container}
-                data={route.params.item.data}
+                data={route.params.item.theater_list}
                 renderItem={this.renderItem}
                 keyExtractor={this.keyExtractor}
                 numColumns={1}

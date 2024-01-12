@@ -38,7 +38,7 @@ function TheaterAreaPage() {
   };
 
   const keyExtractor = (item: IArea) => {
-    return item.id ? item.id : item.id;
+    return item.theater_top ? item.theater_top : item.theater_top;
   };
 
   const go2TheaterListPage = (item: IArea) => {
@@ -49,7 +49,7 @@ function TheaterAreaPage() {
     return (
       <TouchableWithoutFeedback onPress={() => go2TheaterListPage(item)}>
         <View style={styles.item}>
-          <Text style={styles.title}>{item.area}</Text>
+          <Text style={styles.title}>{item.theater_top}</Text>
         </View>
       </TouchableWithoutFeedback>
     );

@@ -3,12 +3,13 @@ import { Reducer } from 'redux';
 import axios from 'axios';
 import Toast from 'react-native-root-toast';
 import DOMParser from "advanced-html-parser";
+import { IStoreInfo } from '@/model/StoreInfo';
 
-const StoreInfo_URL = '/movieinfo_main/';
+const StoreInfo_URL = 'macros/s/AKfycbwwB2Ke85PFeQqt2P9BRZFOxWif6JI4_ImblPyfFlP-VTJLkJJ6sZkCMD4tPhF_g8yT/exec?type=StoreInfo&movie_id=';
 
 export interface IStoreInfoState {
     refreshing: boolean;
-    storeInfo: string | null;
+    storeInfo: IStoreInfo[];
 }
 
 export interface StoreInfoModel extends Model {
@@ -24,7 +25,7 @@ export interface StoreInfoModel extends Model {
 
 const initialState: IStoreInfoState = {
     refreshing: true,
-    storeInfo: null,
+    storeInfo: [],
 };
 
 const StoreInfoModel: StoreInfoModel = {
@@ -41,7 +42,7 @@ const StoreInfoModel: StoreInfoModel = {
     effects: {
         *onRefresh({ payload }, { call, put }) {
             try {
-                var storeInfo = "";
+                const storeInfo: IStoreInfo[] = [];
                 yield put({
                     type: 'setState',
                     payload: {
@@ -52,6 +53,7 @@ const StoreInfoModel: StoreInfoModel = {
 
                 const { data } = yield call(axios.get, StoreInfo_URL + payload.id);
                 console.log(StoreInfo_URL + payload.id);
+                /*
                 if (data) {
                     let doc = DOMParser.parse(data, {
                         ignoreTags: ["script", "style", "head"],
@@ -61,12 +63,12 @@ const StoreInfoModel: StoreInfoModel = {
                     console.log(doc.documentElement.querySelector("span#story")?.innerHTML);
                     storeInfo = doc.documentElement.querySelector("span#story")?.innerHTML.replace(reg, "").replace(/<br\/>/ig, "\n")!;
                 }
-
+                */
                 yield put({
                     type: 'setState',
                     payload: {
                         refreshing: false,
-                        storeInfo: storeInfo,
+                        storeInfo: data,
                     },
                 });
             } catch (error) {

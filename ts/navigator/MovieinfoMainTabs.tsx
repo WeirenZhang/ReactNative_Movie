@@ -53,10 +53,10 @@ function MovieinfoMainTabs(props: IProps) {
   });
 
   const onPress = () => {
-    console.log(' ' + props.route.params.item.cover);
+    console.log(' ' + props.route.params.item.thumb);
     console.log(' ' + props.route.params.item.en);
     console.log(' ' + props.route.params.item.id);
-    console.log(' ' + props.route.params.item.release_movie_name);
+    console.log(' ' + props.route.params.item.title);
     console.log(' ' + props.route.params.item.release_movie_time);
     MovieHistoryDao.updateMovieHistory(props.route.params.item, true, (callback: String) => {
       if (callback === '1') {
@@ -103,10 +103,15 @@ function MovieinfoMainTabs(props: IProps) {
       }}>
       <Tab.Screen
         name="MovieinfoPage"
+        children={() =>
+          <MovieinfoPage id={route.params.item.id} />
+        }
+        /*
         component={MovieinfoPage}
         initialParams={{
           id: route.params.item.id,
         }}
+        */
         options={{
           tabBarLabel: '電影資料',
           tabBarIcon: ({ focused }) => {
@@ -121,10 +126,15 @@ function MovieinfoMainTabs(props: IProps) {
       />
       <Tab.Screen
         name="StoreInfoPage"
+        children={() =>
+          <StoreInfoPage id={route.params.item.id} />
+        }
+        /*
         component={StoreInfoPage}
         initialParams={{
           id: route.params.item.id,
         }}
+        */
         options={{
           tabBarLabel: '劇情簡介',
           tabBarIcon: ({ focused }) => {
@@ -139,10 +149,15 @@ function MovieinfoMainTabs(props: IProps) {
       />
       <Tab.Screen
         name="MovieTimeTabs"
+        children={() =>
+          <MovieTimeTabs id={route.params.item.id} />
+        }
+        /*
         component={MovieTimeTabs}
         initialParams={{
           id: route.params.item.id,
         }}
+        */
         options={{
           tabBarLabel: '播放時間',
           tabBarIcon: ({ focused }) => {
@@ -157,10 +172,15 @@ function MovieinfoMainTabs(props: IProps) {
       />
       <Tab.Screen
         name="VideoResultPage"
+        children={() =>
+          <VideoResultPage id={route.params.item.id} />
+        }
+        /*
         component={VideoResultPage}
         initialParams={{
           id: route.params.item.id,
         }}
+        */
         options={{
           tabBarLabel: '預告片',
           tabBarIcon: ({ focused }) => {

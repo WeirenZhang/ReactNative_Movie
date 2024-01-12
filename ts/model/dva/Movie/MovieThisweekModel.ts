@@ -7,7 +7,7 @@ import { RootState } from '@/model/dva/Models';
 import Toast from 'react-native-root-toast';
 import DOMParser from "advanced-html-parser";
 
-const MovieThisweek_URL = '/movie_thisweek.html?page=';
+const MovieThisweek_URL = 'macros/s/AKfycbwwB2Ke85PFeQqt2P9BRZFOxWif6JI4_ImblPyfFlP-VTJLkJJ6sZkCMD4tPhF_g8yT/exec?type=MovieList&tab=0&page=';
 
 export interface IMovieThisweekModelState {
   dataList: IReleaseList[];
@@ -56,6 +56,7 @@ const MovieThisweekModel: MovieThisweekModel = {
 
         const itemList: IReleaseList[] = [];
         const { data } = yield call(axios.get, MovieThisweek_URL + 1);
+        /*
         if (data) {
           let doc = DOMParser.parse(data, {
             ignoreTags: ["script", "style", "head"],
@@ -82,11 +83,13 @@ const MovieThisweekModel: MovieThisweekModel = {
             itemList.push(a);
           }
         }
+        */
+        console.log(data.length);
 
         yield put({
           type: 'setState',
           payload: {
-            dataList: itemList,
+            dataList: data,
             page: 2,
             withRefresh: true,
             refreshState: RefreshState.Idle,
@@ -120,6 +123,7 @@ const MovieThisweekModel: MovieThisweekModel = {
 
         const itemList: IReleaseList[] = [];
         const { data } = yield call(axios.get, MovieThisweek_URL + payload.page);
+        /*
         if (data) {
           let doc = DOMParser.parse(data, {
             ignoreTags: ["script", "style", "head"],
@@ -146,19 +150,19 @@ const MovieThisweekModel: MovieThisweekModel = {
             itemList.push(a);
           }
         }
-
-        console.log(itemList.length);
+        */
+        console.log(data.length);
 
         yield put({
           type: 'setState',
           payload: {
             dataList:
               payload && payload.withRefresh
-                ? itemList
-                : originList.concat(itemList),
+                ? data
+                : originList.concat(data),
             page: payload.page += 1,
             refreshState:
-              itemList.length == 0
+              data.length == 0
                 ? RefreshState.NoMoreData
                 : RefreshState.Idle,
           },

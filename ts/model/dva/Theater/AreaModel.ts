@@ -6,7 +6,7 @@ import { IArea } from '@/model/Area';
 import { ITheater } from '@/model/Area';
 import DOMParser from "advanced-html-parser";
 
-const Area_URL = '/theater_list.html';
+const Area_URL = 'macros/s/AKfycbwwB2Ke85PFeQqt2P9BRZFOxWif6JI4_ImblPyfFlP-VTJLkJJ6sZkCMD4tPhF_g8yT/exec?type=Area';
 
 export interface IAreaState {
   refreshing: boolean;
@@ -52,6 +52,7 @@ const AreaModel: AreaModel = {
 
         const itemList: IArea[] = [];
         const { data } = yield call(axios.get, Area_URL);
+        /*
         if (data) {
           let doc = DOMParser.parse(data, {
             ignoreTags: ["script", "style", "head"],
@@ -89,12 +90,12 @@ const AreaModel: AreaModel = {
             itemList.push(a);
           }
         }
-
+        */
         yield put({
           type: 'setState',
           payload: {
             refreshing: false,
-            theaterList: itemList,
+            theaterList: data,
           },
         });
       } catch (error) {

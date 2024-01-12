@@ -1,8 +1,6 @@
 import React from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
-import { RouteProp } from '@react-navigation/native';
 import { navigate } from '@/utils/Utils';
-import { RootStackParamList } from '@/navigator/Router';
 import { IMovieTimeResult, ITypes, ITimes, Types } from '@/model/MovieTime';
 import {
   Text,
@@ -11,68 +9,67 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { ITheater } from '@/model/Area';
+import { RootNavigation, RootStackParamList } from '@/navigator/Router';
 
 interface IProps {
-  route: RouteProp<RootStackParamList, 'MovieTimeResultPage'>;
+  //navigation: RootNavigation;
+  items: IMovieTimeResult[];
 }
 
-class MovieTimeResultPage extends React.Component<any> {
+function MovieTimeResultPage(props: IProps) {
 
-  constructor(props: IProps) {
-    super(props);
-  }
+  const { items } = props;
 
-  keyExtractor = (item: IMovieTimeResult) => {
+  const keyExtractor = (item: IMovieTimeResult) => {
     return `${item.theater}`;
   };
 
-  go2TheaterResultPage = (item: IMovieTimeResult) => {
+  const go2TheaterResultPage = (item: IMovieTimeResult) => {
     const item1 = {} as ITheater;
     item1.id = item.id;
     item1.name = item.theater;
-    item1.tel = item.tel;
-    //navigate('TheaterResultPage', { item: item1 });
-    this.props.navigation.push('TheaterResultPage', { item: item1 });
+    navigate('TheaterResultPage', { item: item1 });
+    //props.navigation.push('TheaterResultPage', { item: item1 });
   };
 
-  typesText = (item: ITypes) => {
+  const typesText = (item: ITypes) => {
     return (
       <Text style={styles.type}>{item.type}</Text>
     );
   };
 
-  timesText = (item: ITimes) => {
+  const timesText = (item: ITimes) => {
     return (
       <Text style={styles.time}>{item.time}</Text>
     );
   };
 
-  typesItem = (item: Types) => {
+  const typesItem = (item: Types) => {
     return (
       <View>
-        <View style={styles.timesList}>{item.types.map(this.typesText)}</View>
-        <View style={styles.timesList}>{item.times.map(this.timesText)}</View>
+        <View style={styles.timesList}>{item.types.map(typesText)}</View>
+        <View style={styles.timesList}>{item.times.map(timesText)}</View>
       </View>
     );
   };
 
-  renderItem = ({ item }: ListRenderItemInfo<IMovieTimeResult>) => {
-    return <TouchableOpacity onPress={() => this.go2TheaterResultPage(item)}><View style={styles.item}>
+  const renderItem = ({ item }: ListRenderItemInfo<IMovieTimeResult>) => {
+    return <TouchableOpacity onPress={() => go2TheaterResultPage(item)}><View style={styles.item}>
       <Text style={styles.theater}>{item.theater}</Text>
-      <View style={styles.typesList}>{item.types.map(this.typesItem)}</View>
+      <View style={styles.typesList}>{item.types.map(typesItem)}</View>
     </View></TouchableOpacity>;
   };
 
-  render() {
-    return (
-      <FlatList
-        data={this.props.route.params.item}
-        renderItem={this.renderItem}
-        keyExtractor={this.keyExtractor}
-        showsVerticalScrollIndicator={false}
-      />
-    );
-  }
+
+  return (
+    <FlatList
+      data={items}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      showsVerticalScrollIndicator={false}
+    />
+  );
+
 }
 
 const styles = StyleSheet.create({

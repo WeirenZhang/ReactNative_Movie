@@ -17,7 +17,7 @@ function MovieFavouriteItem(props: IProps) {
   };
 
   const deleteTodo = (item: IReleaseList) => {
-    Alert.alert("警告", "是否將 \"" + item.release_movie_name + "\" 刪除", [{
+    Alert.alert("警告", "是否將 \"" + item.title + "\" 刪除", [{
       text: "Yes",
       onPress: () => MovieHistoryDao.updateMovieHistory(item, false, () => {
         DeviceEventEmitter.emit(EVENT_TYPE.WATCH_VIDEO_TYPE, item);
@@ -30,10 +30,10 @@ function MovieFavouriteItem(props: IProps) {
   return (
     <TouchableOpacity onPress={() => onPress(item)}>
       <View style={styles.container}>
-        <ProgressiveFastImage source={{ uri: item.cover }} style={styles.image} />
+        <ProgressiveFastImage source={{ uri: item.thumb }} style={styles.image} />
         <View style={styles.releaseInfo}>
           <Text style={styles.release_movie_name}>
-            {item.release_movie_name}
+            {item.title}
           </Text>
           <Text style={styles.en}>
             {item.en}

@@ -17,13 +17,13 @@ function ReleaseListItem(props: IProps) {
     <TouchableOpacity onPress={() => onPress(item)}>
       <View style={styles.container}>
         <ProgressiveFastImage
-          source={{ uri: item.cover }}
-          thumbnailSource={{ uri: item.cover }}
+          source={{ uri: item.thumb }}
+          thumbnailSource={{ uri: item.thumb }}
           loadingSource={require('@/assets/loading3.gif')}
           style={styles.image} />
         <View style={styles.releaseInfo}>
           <Text style={styles.release_movie_name}>
-            {item.release_movie_name}
+            {item.title}
           </Text>
           <Text style={styles.en}>
             {item.en}

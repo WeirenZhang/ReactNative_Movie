@@ -5,7 +5,7 @@ import Toast from 'react-native-root-toast';
 import { IVideoResult } from '@/model/VideoResult';
 import DOMParser from "advanced-html-parser";
 
-const VideoResult_URL = '/movieinfo_main/';
+const VideoResult_URL = 'macros/s/AKfycbwwB2Ke85PFeQqt2P9BRZFOxWif6JI4_ImblPyfFlP-VTJLkJJ6sZkCMD4tPhF_g8yT/exec?type=Video&movie_id=';
 
 export interface IVideoResultState {
     refreshing: boolean;
@@ -54,6 +54,7 @@ const VideoResultModel: VideoResultModel = {
 
                 const { data } = yield call(axios.get, VideoResult_URL + payload.id);
                 console.log(VideoResult_URL + payload.id);
+                /*
                 if (data) {
                     let doc = DOMParser.parse(data, {
                         ignoreTags: ["script", "style", "head"],
@@ -82,12 +83,12 @@ const VideoResultModel: VideoResultModel = {
                         }
                     }
                 }
-
+                */
                 yield put({
                     type: 'setState',
                     payload: {
                         refreshing: false,
-                        videoResultList: itemList,
+                        videoResultList: data,
                     },
                 });
             } catch (error) {

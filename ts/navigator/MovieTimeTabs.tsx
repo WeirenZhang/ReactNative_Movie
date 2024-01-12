@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Button, Platform, StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import { Platform, StyleSheet, View, Text } from 'react-native';
 import MovieTimeResultPage from '@/page/Movieinfo/MovieTimeResultPage';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/model/dva/Models';
-import { IMovieTimeTab, IMovieTimeResult } from '@/model/MovieTime';
+import { IMovieTimeTab, IMovieTimeResult, data } from '@/model/MovieTime';
 import { createMovieTimeTabsModel } from '@/config/dva';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { RootStackParamList } from '@/navigator/Router';
@@ -13,6 +13,8 @@ import moment from 'moment';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import IconWantempty from '@/assets/iconfont/IconWantempty';
 import Octicons from 'react-native-vector-icons/Octicons';
+import { Dropdown } from 'react-native-element-dropdown';
+import { RootNavigation } from '@/navigator/Router';
 
 const TAB_LIST_TYPE = 'movieTime/getTabList';
 
@@ -26,73 +28,73 @@ const mapStateToProps = ({ movieTime }: RootState) => {
   return {
     showLoading: movieTime.showLoading,
     tabList: movieTime.tabList,
-    date_string: movieTime.date_string
   };
 };
 
 const Tab = createMaterialTopTabNavigator<BottomParamList>();
 
 interface IProps {
-  route: RouteProp<RootStackParamList, 'MovieTimeTabs'>;
+  //route: RouteProp<RootStackParamList, 'MovieTimeTabs'>;
+  //navigation: RootNavigation;
+  id: string;
 }
 
 function MovieTimeTabs(props: IProps) {
   const dispatch = useDispatch();
-  const { showLoading, tabList, date_string } = useSelector(mapStateToProps, shallowEqual);
+  const { showLoading, tabList } = useSelector(mapStateToProps, shallowEqual);
+  const { id } = props;
 
   useEffect(() => {
-    var timestemp = new Date();
+    //var timestemp = new Date();
     //moment.locale('zh-tw');
 
-    var moment = require('moment');
-    var esLocale = require('moment/locale/zh-tw');
-    moment.locale('zh-tw', esLocale);
+    //var moment = require('moment');
+    //var esLocale = require('moment/locale/zh-tw');
+    //moment.locale('zh-tw', esLocale);
 
-    const nowDate = moment(timestemp, 'YYYY-DD-MM').format().split('T')[0];
-    console.log('NewDate ' + nowDate);
+    //const nowDate = moment(timestemp, 'YYYY-DD-MM').format().split('T')[0];
+    //console.log('NewDate ' + nowDate);
     dispatch({
       type: TAB_LIST_TYPE,
       payload: {
-        id: props.route.params.id,
-        date: nowDate,
+        id: id,
       },
     });
-  }, [dispatch, props.route.params.id]);
+  }, [dispatch, id]);
 
-  useFocusEffect(
-    useCallback(() => {
-      var timestemp = new Date();
-      //moment.locale('zh-tw');
-
-      var moment = require('moment');
-      var esLocale = require('moment/locale/zh-tw');
-      moment.locale('zh-tw', esLocale);
-
-      const nowDate = moment(timestemp, 'YYYY-DD-MM').format().split('T')[0];
-      console.log('NewDate ' + nowDate);
-      dispatch({
-        type: TAB_LIST_TYPE,
-        payload: {
-          id: props.route.params.id,
-          date: nowDate,
-        },
-      });
-    }, [dispatch, props.route.params.id])
-  )
-
+  /*
+   useFocusEffect(
+     useCallback(() => {
+       //var timestemp = new Date();
+       //moment.locale('zh-tw');
+ 
+       //var moment = require('moment');
+       //var esLocale = require('moment/locale/zh-tw');
+       //moment.locale('zh-tw', esLocale);
+ 
+       //const nowDate = moment(timestemp, 'YYYY-DD-MM').format().split('T')[0];
+       //console.log('NewDate ' + nowDate);
+       dispatch({
+         type: TAB_LIST_TYPE,
+         payload: {
+           id: props.route.params.id,
+         },
+       });
+     }, [dispatch, props.route.params.id])
+   )
+   */
   const renderScreen = (tab: IMovieTimeTab) => {
     //const renderScreen = ({ tab, index }: { tab: IMovieTimeTab; index: number }) => {
     //动态创建每个Tab页面对于的Model对象
     //createMovieTimeTabsModel(tab.area);
     return (
       <Tab.Screen
-        key={tab.id}
+        key={tab.area}
         name={tab.area}
         options={{ title: tab.area }}
-        component={MovieTimeResultPage}
-        initialParams={{
-          item: tab.data,
-        }}
+        children={() =>
+          <MovieTimeResultPage items={tab.data} />
+        }
       />
     );
   };
@@ -125,13 +127,16 @@ function MovieTimeTabs(props: IProps) {
     dispatch({
       type: TAB_LIST_TYPE,
       payload: {
-        id: props.route.params.id,
+        id: id,
         date: nowDate,
       },
     });
 
     hideDatePicker();
   };
+
+  const [value, setValue] = useState<number>(0);
+  const [isFocus, setIsFocus] = useState(false);
 
   if (showLoading) {
     return (
@@ -143,9 +148,10 @@ function MovieTimeTabs(props: IProps) {
     );
   }
 
-  if (tabList.length === 0) {
+  if (tabList?.length === 0 || tabList == null) {
     return (
       <View style={styles.container}>
+        {/*
         <View style={styles.icon_container}>
           <Octicons.Button name="search" onPress={showDatePicker} size={20} style={styles.icon}>
             <Text style={styles.text}>{date_string}</Text>
@@ -159,6 +165,7 @@ function MovieTimeTabs(props: IProps) {
           date={new Date(date_string)}
           onConfirm={handleConfirm}
           onCancel={hideDatePicker} />
+        */}
         <View style={styles.empty}>
           <IconWantempty size={60} />
           <Text style={styles.emptyText}>暫時沒有數據</Text>
@@ -166,13 +173,49 @@ function MovieTimeTabs(props: IProps) {
       </View >
     )
   } else {
+    console.log('tabList.length ' + tabList.length);
+    var data: data[] = [];
+    for (let i = 0; i < tabList.length; i++) {
+      if (tabList[i] != null) {
+        var a = {} as data;
+        a.label = tabList[i].date;
+        a.value = i;
+        data.push(a);
+      }
+    }
+
     return (
       <View style={styles.container}>
+        {/*
         <View style={styles.icon_container}>
           <Octicons.Button name="search" onPress={showDatePicker} size={20} style={styles.icon}>
             <Text style={styles.text}>{date_string}</Text>
           </Octicons.Button>
         </View>
+        */}
+        <View style={styles.dropdown_container}>
+          <Dropdown
+            style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+            placeholderStyle={styles.placeholderStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            inputSearchStyle={styles.inputSearchStyle}
+            iconStyle={styles.iconStyle}
+            data={data}
+            labelField="label"
+            valueField="value"
+            placeholder={!isFocus ? tabList[value].date : tabList[value].date}
+            onFocus={() => setIsFocus(true)}
+            onBlur={() => setIsFocus(false)}
+            onChange={item => {
+              setValue(item.value);
+              dispatch({
+                type: 'setState'
+              });
+              setIsFocus(false);
+            }}
+          />
+        </View>
+        {/*
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
           mode="date"
@@ -181,6 +224,7 @@ function MovieTimeTabs(props: IProps) {
           date={new Date(date_string)}
           onConfirm={handleConfirm}
           onCancel={hideDatePicker} />
+        */}
         <Tab.Navigator
           lazy
           sceneContainerStyle={styles.sceneContainerStyle}
@@ -204,7 +248,7 @@ function MovieTimeTabs(props: IProps) {
             inactiveTintColor: '#9a9a9a',
             scrollEnabled: true,
           }}>
-          {tabList.map(renderScreen)}
+          {tabList[value].list.map(renderScreen)}
         </Tab.Navigator>
       </View>
     );
@@ -221,6 +265,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     flex: 1,
+  },
+  dropdown_container: {
+    backgroundColor: 'white',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   empty: {
     flex: 1,
@@ -242,6 +291,36 @@ const styles = StyleSheet.create({
     backgroundColor: '#434eae',
     alignItems: "center",
     justifyContent: "center",
+  },
+  dropdown: {
+    height: 50,
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+  },
+  label: {
+    position: 'absolute',
+    backgroundColor: 'white',
+    left: 22,
+    top: 8,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
   },
 });
 

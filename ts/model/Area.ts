@@ -1,7 +1,6 @@
 export interface IArea {
-  id: string;
-  area: string;
-  data: ITheater[];
+  theater_top: string;
+  theater_list: ITheater[];
 }
 
 export interface ITheater {

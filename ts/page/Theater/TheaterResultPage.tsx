@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/model/dva/Models';
-import { ITheater, ITapbox, ITheater_time } from '@/model/Theater';
+import { ITheater } from '@/model/Theater';
 import {
   FlatList,
   Text,
@@ -20,9 +20,12 @@ import EmptyView from '@/components/common/EmptyView';
 import TheaterHistoryDao from '@/dao/TheaterHistoryDao';
 import Icon from 'react-native-vector-icons/Octicons';
 import ProgressiveFastImage from "@freakycoder/react-native-progressive-fast-image";
+import { data } from '@/model/MovieTime';
 
 import { TheaterResultFotoWidth, TheaterResultFotoHeight, TheaterResultTapboxWidth, TheaterResultTheater_timeWidth } from '@/utils/Utils';
 import FastImage from 'react-native-fast-image';
+import { ITimes, ITypes, Types } from '@/model/MovieTime';
+import { Dropdown } from 'react-native-element-dropdown';
 
 const REFRESH_TYPE = 'theater/onRefresh';
 
@@ -88,7 +91,7 @@ function TheaterResultPage(props: IProps) {
       },
     });
   }, [dispatch, props.route.params.item.id]);
-
+  /*
   useFocusEffect(
     useCallback(() => {
       dispatch({
@@ -99,7 +102,7 @@ function TheaterResultPage(props: IProps) {
       });
     }, [dispatch, props.route.params.item.id])
   )
-
+  */
   const onRefresh = () => {
     dispatch({
       type: REFRESH_TYPE,
@@ -109,36 +112,47 @@ function TheaterResultPage(props: IProps) {
     });
   };
 
+  const [value, setValue] = useState<number>(0);
+  const [isFocus, setIsFocus] = useState(false);
+
   const keyExtractor = (item: ITheater) => {
     return item.id ? item.id : item.id;
   };
 
   const go2MovieinfoMainPage = (item: IReleaseList) => {
-    props.navigation.push('MovieinfoMainTabs', { item: item });
-    //navigate('MovieinfoMainTabs', { item: item });
+    //props.navigation.push('MovieinfoMainTabs', { item: item });
+    navigate('MovieinfoMainTabs', { item: item });
   };
 
-  const tapboxItem = (item: ITapbox) => {
+  const typesText = (item: ITypes) => {
     return (
-      <Text style={styles.tapbox}>{item.name}</Text>
+      <Text style={styles.type}>{item.type}</Text>
     );
   };
 
-  const theatertimeItem = (item: ITheater_time) => {
+  const timesText = (item: ITimes) => {
     return (
-      <Text style={styles.theatertime}>{item.name}</Text>
+      <Text style={styles.time}>{item.time}</Text>
+    );
+  };
+
+  const typesItem = (item: Types) => {
+    return (
+      <View>
+        <View style={styles.timesList}>{item.types.map(typesText)}</View>
+        <View style={styles.timesList}>{item.times.map(timesText)}</View>
+      </View>
     );
   };
 
   const renderItem = ({ item }: { item: ITheater }) => {
     const item1 = {} as IReleaseList;
-    item1.release_movie_name = item.theaterlist_name;
+    item1.title = item.theaterlist_name;
     item1.id = item.id;
     item1.en = item.en;
-    item1.cover = item.release_foto;
+    item1.thumb = item.release_foto;
     item1.release_movie_time = "";
     return (
-      //<TouchableOpacity onPress={() => go2MovieinfoMainPage(item1)}>
       <TouchableOpacity onPress={() => go2MovieinfoMainPage(item1)}>
         <View style={styles.item}>
           <ProgressiveFastImage source={{ uri: item.release_foto }} style={styles.image} />
@@ -149,28 +163,62 @@ function TheaterResultPage(props: IProps) {
             <Text style={styles.en}>
               {item.en}
             </Text>
-            <FastImage source={{ uri: "https://s.yimg.com/cv/ae/movies/" + item.icon + ".png" }} style={styles.icon45} />
-            <View style={styles.tapboxList}>{item.tapbox.map(tapboxItem)}</View>
-            <View style={styles.theatertimeList}>{item.theater_time.map(theatertimeItem)}</View>
+            <FastImage source={{ uri: item.icon }} style={styles.icon45} />
+            <View style={styles.theatertimeList}>{item.types.map(typesItem)}</View>
           </View>
         </View>
       </TouchableOpacity>
     );
   };
-  if (theaterList.length === 0 && !refreshing) {
+  if (theaterList.length === 0 && !refreshing || theaterList == null && !refreshing) {
     return <EmptyView />;
   } else {
+
+    var data: data[] = [];
+    for (let i = 0; i < theaterList.length; i++) {
+      if (theaterList[i] != null) {
+        var a = {} as data;
+        a.label = theaterList[i].date;
+        a.value = i;
+        data.push(a);
+      }
+    }
+
     return (
-      <FlatList
-        data={theaterList}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        numColumns={1}
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      />
+      <View style={styles.container}>
+        <View style={styles.dropdown_container}>
+          <Dropdown
+            style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+            placeholderStyle={styles.placeholderStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            inputSearchStyle={styles.inputSearchStyle}
+            iconStyle={styles.iconStyle}
+            data={data}
+            labelField="label"
+            valueField="value"
+            placeholder={!isFocus ? theaterList[value]?.date : theaterList[value]?.date}
+            onFocus={() => setIsFocus(true)}
+            onBlur={() => setIsFocus(false)}
+            onChange={item => {
+              setValue(item.value);
+              dispatch({
+                type: 'setState'
+              });
+              setIsFocus(false);
+            }}
+          />
+        </View>
+        <FlatList
+          data={theaterList[value]?.data}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          numColumns={1}
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        />
+      </View>
     );
   }
 }
@@ -248,6 +296,64 @@ const styles = StyleSheet.create({
     //backgroundColor: '#ffff00',
     width: TheaterResultTheater_timeWidth,
     margin: 5,
+    fontSize: 16,
+  },
+  type: {
+    textAlign: 'center',
+    padding: 5,
+    backgroundColor: '#c840aa',
+    color: '#fff',
+    width: 100,
+    margin: 5,
+    fontSize: 16,
+  },
+  timesList: {
+    //backgroundColor: '#fff',
+    margin: 5,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  time: {
+    textAlign: 'center',
+    padding: 5,
+    //backgroundColor: '#ff0000',
+    //width: TheaterResultTheater_timeWidth,
+    margin: 5,
+    fontSize: 16,
+  },
+  dropdown_container: {
+    backgroundColor: 'white',
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  dropdown: {
+    height: 50,
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+  },
+  label: {
+    position: 'absolute',
+    backgroundColor: 'white',
+    left: 22,
+    top: 8,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
     fontSize: 16,
   },
 });

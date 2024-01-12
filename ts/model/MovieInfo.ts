@@ -4,7 +4,6 @@ export interface IMovieInfo {
     movie_intro_foto: string;
     icon: string;
     release_movie_time: string;
-    level_name_box: string;
     length: string;
     director: string;
     actor: string;

@@ -29,6 +29,7 @@ import { navigationRef } from '@/utils/Utils';
 import { IArea, ITheater } from '@/model/Area';
 import { IMovieTimeTab, IMovieTimeResult } from '@/model/MovieTime';
 import { IReleaseList } from '@/model/ReleaseList';
+import MovieTimeResultPage from '@/page/Movieinfo/MovieTimeResultPage';
 
 //定义堆栈路由参数每一个页面的名称以及进入页面传递参数的类型
 export type RootStackParamList = {
@@ -49,7 +50,7 @@ export type RootStackParamList = {
     id: string;
   };
   MovieTimeResultPage: {
-    item: IMovieTimeResult[];
+    items: IMovieTimeResult[];
   };
   StoreInfoPage: {
     id: string;
@@ -107,11 +108,11 @@ function RootStackScreen() {
       <Stack.Screen
         name="MovieThisweekPage"
         component={MovieThisweekPage}
-        options={{ title: '本週新片' }} />
+        options={{ title: '現正熱映' }} />
       <Stack.Screen
         name="MovieIntheatersPage"
         component={MovieIntheatersPage}
-        options={{ title: '上映中' }} />
+        options={{ title: '即將上映' }} />
       <Stack.Screen
         name="MovieComingsoonPage"
         component={MovieComingsoonPage}
@@ -119,23 +120,22 @@ function RootStackScreen() {
       <Stack.Screen
         name="MovieinfoMainTabs"
         component={MovieinfoMainTabs}
-        options={({ route }) => ({ title: route.params.item.release_movie_name })} />
+        options={({ route }) => ({ title: route.params.item.title })} />
       <Stack.Screen
         name="MovieInfoPage"
-        component={MovieInfoPage}
-        options={({ route }) => ({ title: route.params.id })} />
+        component={MovieInfoPage} />
       <Stack.Screen
         name="StoreInfoPage"
-        component={StoreInfoPage}
-        options={({ route }) => ({ title: route.params.id })} />
+        component={StoreInfoPage} />
       <Stack.Screen
         name="MovieTimeTabs"
-        component={MovieTimeTabs}
-        options={({ route }) => ({ title: route.params.id })} />
+        component={MovieTimeTabs} />
+      <Stack.Screen
+        name="MovieTimeResultPage"
+        component={MovieTimeResultPage} />
       <Stack.Screen
         name="VideoResultPage"
-        component={VideoResultPage}
-        options={({ route }) => ({ title: route.params.id })} />
+        component={VideoResultPage} />
       <Stack.Screen
         name="TheaterAreaPage"
         component={TheaterAreaPage}
@@ -143,7 +143,7 @@ function RootStackScreen() {
       <Stack.Screen
         name="TheaterListPage"
         component={TheaterListPage}
-        options={({ route }) => ({ title: route.params.item.area })} />
+        options={({ route }) => ({ title: route.params.item.theater_top })} />
       <Stack.Screen
         name="TheaterResultPage"
         component={TheaterResultPage}
@@ -154,12 +154,10 @@ function RootStackScreen() {
         options={{ title: '我的最愛' }} />
       <Stack.Screen
         name="MovieFavouritePage"
-        component={MovieFavouritePage}
-        options={{ title: '我的最愛' }} />
+        component={MovieFavouritePage} />
       <Stack.Screen
         name="TheaterFavouritePage"
-        component={TheaterFavouritePage}
-        options={{ title: '我的最愛' }} />
+        component={TheaterFavouritePage} />
       <Stack.Screen
         name="WebViewPage"
         component={WebViewPage}

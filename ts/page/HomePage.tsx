@@ -12,15 +12,11 @@ import { IHome } from '@/model/Home';
 
 const data = [
   {
-    icon: require('@/assets/enl_2.png'),
-    title: "本週新片"
+    icon: require('@/assets/enl_1.png'),
+    title: "現正熱映"
   },
   {
     icon: require('@/assets/enl_4.png'),
-    title: "上映中"
-  },
-  {
-    icon: require('@/assets/enl_1.png'),
     title: "即將上映"
   },
   {
@@ -69,15 +65,12 @@ function HomePage(props: IProps) {
         navigation.navigate('MovieIntheatersPage');
         break; /* 可选的 */
       case 2:
-        navigation.navigate('MovieComingsoonPage');
-        break; /* 可选的 */
-      case 3:
         navigation.navigate('TheaterAreaPage');
         break; /* 可选的 */
-      case 4:
+      case 3:
         navigation.navigate('MyFavouriteTabs');
         break; /* 可选的 */
-      case 5:
+      case 4:
         navigation.navigate('WebViewPage', { title: '網路訂票', url: 'https://www.ezding.com.tw/faq?comeFromApp=true&device=app' });
         break; /* 可选的 */
       /* 您可以有任意数量的 case 语句 */

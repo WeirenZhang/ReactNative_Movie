@@ -66,7 +66,7 @@ const MovieComingsoonModel: MovieComingsoonModel = {
           for (let index = 0; index < btnsArr.length; index++) {
             const a = {} as IReleaseList;
             console.log(btnsArr[index].querySelector("div.release_movie_name > a")?.textContent);
-            a.release_movie_name = btnsArr[index].querySelector("div.release_movie_name > a")?.textContent!;
+            a.title = btnsArr[index].querySelector("div.release_movie_name > a")?.textContent!;
 
             const str = btnsArr[index].querySelector("div.release_movie_name > a")?.getAttribute("href")!;
             const id = str.split('-');
@@ -78,7 +78,7 @@ const MovieComingsoonModel: MovieComingsoonModel = {
             console.log(btnsArr[index].querySelector("div.release_movie_time")?.textContent);
             a.release_movie_time = btnsArr[index].querySelector("div.release_movie_time")?.textContent!;
             console.log(btnsArr[index].querySelector("div.release_foto img")?.getAttribute('data-src'));
-            a.cover = btnsArr[index].querySelector("div.release_foto img")?.getAttribute('data-src')!;
+            a.thumb = btnsArr[index].querySelector("div.release_foto img")?.getAttribute('data-src')!;
             itemList.push(a);
           }
         }
@@ -130,7 +130,7 @@ const MovieComingsoonModel: MovieComingsoonModel = {
           for (let index = 0; index < btnsArr.length; index++) {
             const a = {} as IReleaseList;
             console.log(btnsArr[index].querySelector("div.release_movie_name > a")?.textContent);
-            a.release_movie_name = btnsArr[index].querySelector("div.release_movie_name > a")?.textContent!;
+            a.title = btnsArr[index].querySelector("div.release_movie_name > a")?.textContent!;
 
             const str = btnsArr[index].querySelector("div.release_movie_name > a")?.getAttribute("href")!;
             const id = str.split('-');
@@ -142,7 +142,7 @@ const MovieComingsoonModel: MovieComingsoonModel = {
             console.log(btnsArr[index].querySelector("div.release_movie_time")?.textContent);
             a.release_movie_time = btnsArr[index].querySelector("div.release_movie_time")?.textContent!;
             console.log(btnsArr[index].querySelector("div.release_foto img")?.getAttribute('data-src'));
-            a.cover = btnsArr[index].querySelector("div.release_foto img")?.getAttribute('data-src')!;
+            a.thumb = btnsArr[index].querySelector("div.release_foto img")?.getAttribute('data-src')!;
             itemList.push(a);
           }
         }

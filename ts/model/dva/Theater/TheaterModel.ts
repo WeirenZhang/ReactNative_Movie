@@ -2,16 +2,14 @@ import { Effect, Model } from 'dva-core-ts';
 import { Reducer } from 'redux';
 import axios from 'axios';
 import Toast from 'react-native-root-toast';
-import { ITheater } from '@/model/Theater';
-import { ITapbox } from '@/model/Theater';
-import { ITheater_time } from '@/model/Theater';
+import { IDateTheater, ITheater } from '@/model/Theater';
 import DOMParser from "advanced-html-parser";
 
-const Theater_URL = '/theater_result.html/id=';
+const Theater_URL = 'macros/s/AKfycbwwB2Ke85PFeQqt2P9BRZFOxWif6JI4_ImblPyfFlP-VTJLkJJ6sZkCMD4tPhF_g8yT/exec?type=TheaterResult&cinema_id=';
 
 export interface ITheaterState {
   refreshing: boolean;
-  theaterList: ITheater[];
+  theaterList: IDateTheater[];
 }
 
 export interface TheaterModel extends Model {
@@ -44,17 +42,16 @@ const TheaterModel: TheaterModel = {
   effects: {
     *onRefresh({ payload }, { call, put }) {
       try {
-        const itemList: ITheater[] = [];
 
         yield put({
           type: 'setState',
           payload: {
             refreshing: true,
-            theaterList: itemList,
           },
         });
 
         const { data } = yield call(axios.get, Theater_URL + payload.id);
+        /*
         if (data) {
           let doc = DOMParser.parse(data, {
             ignoreTags: ["script", "style", "head"],
@@ -126,12 +123,12 @@ const TheaterModel: TheaterModel = {
             }
           }
         }
-
+        */
         yield put({
           type: 'setState',
           payload: {
             refreshing: false,
-            theaterList: itemList,
+            theaterList: data,
           },
         });
       } catch (error) {

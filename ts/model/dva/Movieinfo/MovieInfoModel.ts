@@ -5,11 +5,11 @@ import Toast from 'react-native-root-toast';
 import { IMovieInfo } from '@/model/MovieInfo';
 import DOMParser from "advanced-html-parser";
 
-const MovieInfo_URL = '/movieinfo_main/';
+const MovieInfo_URL = 'macros/s/AKfycbwwB2Ke85PFeQqt2P9BRZFOxWif6JI4_ImblPyfFlP-VTJLkJJ6sZkCMD4tPhF_g8yT/exec?type=MovieInfo&movie_id=';
 
 export interface IMovieInfoState {
     refreshing: boolean;
-    movieInfo: IMovieInfo | null;
+    movieInfo: IMovieInfo[];
 }
 
 export interface MovieInfoModel extends Model {
@@ -25,7 +25,7 @@ export interface MovieInfoModel extends Model {
 
 const initialState: IMovieInfoState = {
     refreshing: true,
-    movieInfo: null,
+    movieInfo: [],
 };
 
 const MovieInfoModel: MovieInfoModel = {
@@ -42,7 +42,7 @@ const MovieInfoModel: MovieInfoModel = {
     effects: {
         *onRefresh({ payload }, { call, put }) {
             try {
-                const MovieInfo = {} as IMovieInfo;
+                const MovieInfo: IMovieInfo[] = [];
                 yield put({
                     type: 'setState',
                     payload: {
@@ -53,6 +53,7 @@ const MovieInfoModel: MovieInfoModel = {
 
                 const { data } = yield call(axios.get, MovieInfo_URL + payload.id);
                 console.log(MovieInfo_URL + payload.id);
+                /*
                 if (data) {
                     let doc = DOMParser.parse(data, {
                         ignoreTags: ["script", "style", "head"],
@@ -95,12 +96,12 @@ const MovieInfoModel: MovieInfoModel = {
                         }
                     }
                 }
-
+                */
                 yield put({
                     type: 'setState',
                     payload: {
                         refreshing: false,
-                        movieInfo: MovieInfo,
+                        movieInfo: data,
                     },
                 });
             } catch (error) {

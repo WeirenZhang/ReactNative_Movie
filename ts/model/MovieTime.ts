@@ -1,5 +1,14 @@
+export interface IMovieDateTab {
+    date: string;
+    list: IMovieTimeTab[];
+}
+
+export interface data {
+    label: string;
+    value: number;
+}
+
 export interface IMovieTimeTab {
-    id: number;
     area: string;
     data: IMovieTimeResult[];
 }
@@ -7,7 +16,6 @@ export interface IMovieTimeTab {
 export interface IMovieTimeResult {
     id: string;
     theater: string;
-    tel: string;
     types: Types[];
 }
 

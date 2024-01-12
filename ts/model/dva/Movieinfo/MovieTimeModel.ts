@@ -1,14 +1,14 @@
 import { Effect, Model } from 'dva-core-ts';
 import { Reducer } from 'redux';
 import axios from 'axios';
-import Toast from 'react-native-root-toast';
-import { IMovieTimeTab, IMovieTimeResult, ITypes, ITimes, Types } from '@/model/MovieTime';
+import { IMovieDateTab } from '@/model/MovieTime';
 import DOMParser from "advanced-html-parser";
+
+const MovieTime_URL = 'macros/s/AKfycbwwB2Ke85PFeQqt2P9BRZFOxWif6JI4_ImblPyfFlP-VTJLkJJ6sZkCMD4tPhF_g8yT/exec?type=MovieTime&movie_id=';
 
 export interface IMovieTimeState {
   showLoading: boolean;
-  tabList: IMovieTimeTab[];
-  date_string: string;
+  tabList: IMovieDateTab[];
 }
 
 export interface MovieTimeModel extends Model {
@@ -25,7 +25,6 @@ export interface MovieTimeModel extends Model {
 const initialState: IMovieTimeState = {
   showLoading: true,
   tabList: [],
-  date_string: "",
 };
 
 const MovieTimeModel: MovieTimeModel = {
@@ -42,28 +41,26 @@ const MovieTimeModel: MovieTimeModel = {
   effects: {
     *getTabList({ payload }, { call, put }) {
       try {
-        const tabList: IMovieTimeTab[] = [];
 
         yield put({
           type: 'setState',
           payload: {
             showLoading: true,
-            tabList: tabList,
-            date_string: payload.date
           },
         });
 
-        const MovieTime_URL = '/ajax/pc/get_schedule_by_movie?movie_id=' + payload.id + '&date=' + payload.date + '&area_id=&theater_id=&datetime=&movie_type_id=';
-        const { data } = yield call(axios.get, MovieTime_URL);
+        const { data } = yield call(axios.get, MovieTime_URL + payload.id);
+
+        /*
         const { view } = data;
         if (view) {
           //console.log('view ' + view);
-
+ 
           let doc = DOMParser.parse(view, {
             ignoreTags: ["script", "style", "head"],
             onlyBody: true
           });
-
+ 
           const area = doc.documentElement.querySelectorAll("div.area_timebox");
           var areaArr = Array.from(area);
           //console.log(areaArr.length);
@@ -72,10 +69,10 @@ const MovieTimeModel: MovieTimeModel = {
             //console.log(areaArr[index].querySelector("div.area_title")?.textContent);
             a.id = index;
             a.area = areaArr[index].querySelector("div.area_title")?.textContent!;
-
+ 
             var theater = areaArr[index].querySelectorAll("ul");
             var theaterArr = Array.from(theater);
-
+ 
             //console.log("theaterArr" + theaterArr.length);
             const resulList: IMovieTimeResult[] = [];
             for (let index1 = 0; index1 < theaterArr.length; index1++) {
@@ -87,17 +84,17 @@ const MovieTimeModel: MovieTimeModel = {
               //console.log(' ' + theaterArr[index1].querySelector("li.adds > a")?.textContent);
               b.theater = theaterArr[index1].querySelector("li.adds > a")?.textContent!;
               b.tel = theaterArr[index1].querySelector("li.adds > span")?.textContent!;
-
+ 
               var taps = theaterArr[index1].querySelectorAll("li.taps");
               var typesArr = Array.from(taps);
               //console.log("typeArr" + typeArr.length);
               const types: Types[] = [];
               for (let index2 = 0; index2 < typesArr.length; index2++) {
                 const _types = {} as Types;
-
+ 
                 var type1 = typesArr[index2].querySelectorAll("span");
                 var typeArr = Array.from(type1!);
-
+ 
                 const _itypes: ITypes[] = [];
                 for (let index3 = 0; index3 < typeArr.length; index3++) {
                   const t = {} as ITypes;
@@ -107,11 +104,11 @@ const MovieTimeModel: MovieTimeModel = {
                     _itypes.push(t);
                   }
                 }
-
+ 
                 var times1 = typesArr[index2].querySelector(" ~ li");
                 var time1 = times1?.querySelectorAll("label");
                 var timeArr = Array.from(time1!);
-
+ 
                 const _itimes: ITimes[] = [];
                 for (let index3 = 0; index3 < timeArr.length; index3++) {
                   const t = {} as ITimes;
@@ -121,7 +118,7 @@ const MovieTimeModel: MovieTimeModel = {
                     _itimes.push(t);
                   }
                 }
-
+ 
                 _types.types = _itypes;
                 _types.times = _itimes;
                 types.push(_types);
@@ -132,7 +129,7 @@ const MovieTimeModel: MovieTimeModel = {
             a.data = resulList;
             tabList.push(a);
           }
-
+ 
           //console.log('#####' + tabList.length);
           for (let index = 0; index < tabList.length; index++) {
             console.log('#######' + tabList[index].id);
@@ -151,13 +148,12 @@ const MovieTimeModel: MovieTimeModel = {
             }
           }
         }
-
+        */
         yield put({
           type: 'setState',
           payload: {
             showLoading: false,
-            tabList: tabList,
-            date_string: payload.date
+            tabList: data,
           },
         });
       } catch (error) {
