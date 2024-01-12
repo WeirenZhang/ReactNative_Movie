@@ -1,7 +1,7 @@
 ## 3.快照
 
 
-|作品详情|推荐小说|评论列表|
+|首頁|推荐小说|评论列表|
 |:---:|:---:|:---:|
 |![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.48.24.808.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.48.41.879.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.48.51.703.png)
 
