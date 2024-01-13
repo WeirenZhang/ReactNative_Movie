@@ -16,7 +16,7 @@
 |:---:|:---:|:---:|
 |![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.49.59.983.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.50.10.992.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-13_19.13.38.721.png)
 
-# 在 Google Play 上获取
+# 在 Google Play 上取得
 <a href="https://play.google.com/store/apps/details?id=com.weiren.zhang.movie_react_native" target="_blank">
     <img
         alt="Get it on Google Play"
