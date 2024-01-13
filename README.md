@@ -19,13 +19,12 @@
 |![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.49.59.983.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.50.10.992.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-13_19.13.38.721.png)
 
 # 關於我
-  - WX：fmtjava
-  - QQ：2694746499
-  - Email：2694746499@qq.com
-  - Github：https://github.com/fmtjava
+  - LINE：mark888123
+  - Email：a22347328@gmail.com
+  - Github：https://github.com/WeirenZhang
   
 # 聲明
-  專案中的 API 均來自開眼視頻，純屬學習交流使用，不得用於商業用途！
+  專案中的資料均來自ez訂，開眼電影網，YouTube等網站，純屬學習交流使用，不得用於商業用途！
   
 # License 
  
