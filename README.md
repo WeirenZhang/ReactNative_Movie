@@ -1,6 +1,6 @@
 # ReactNative_Movie
-Kotlin版： [Kotlin_Movie](https://github.com/WeirenZhang/Kotlin_Movie)<br /><br />
 Java版：[Java_Movie](https://github.com/WeirenZhang/Java_Movie)<br /><br />
+Kotlin版： [Kotlin_Movie](https://github.com/WeirenZhang/Kotlin_Movie)<br /><br />
 Flutter版：[Flutter_Movie](https://github.com/WeirenZhang/Flutter_Movie)<br /><br />
 
 # 專案截圖
