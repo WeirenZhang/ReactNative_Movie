@@ -1,4 +1,4 @@
-# 快照
+# 專案截圖
 
 |首頁|現正熱映|即將上映|
 |:---:|:---:|:---:|
@@ -18,7 +18,7 @@
 
 # 在 Google Play 上获取
 
-<a href="https://play.google.com/store/apps/details?id=com.weiren.zhang.movie_react_native">
+<a href="https://play.google.com/store/apps/details?id=com.weiren.zhang.movie_react_native" target="_blank">
     <img
         alt="Get it on Google Play"
         src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
