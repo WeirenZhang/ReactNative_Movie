@@ -16,6 +16,17 @@
 |:---:|:---:|:---:|
 |![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.49.59.983.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.50.10.992.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-13_19.13.38.721.png)
 
+# 在 Google Play 上获取
+
+<a href="https://play.google.com/store/apps/details?id=com.weiren.zhang.movie_react_native">
+    <img
+        alt="Get it on Google Play"
+        src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
+        width="330"
+        height="128"
+    />
+</a>
+
 # 關於我
   - LINE：mark888123
   - Email：a22347328@gmail.com
