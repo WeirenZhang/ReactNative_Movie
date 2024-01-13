@@ -1,10 +1,8 @@
-## 3.快照
-
+# 快照
 
 |首頁|現正熱映|即將上映|
 |:---:|:---:|:---:|
 |![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.48.24.808.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.48.41.879.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.49.25.352.png)
-
 
 |電影資料|劇情簡介|播放時間|
 |:---:|:---:|:---:|
