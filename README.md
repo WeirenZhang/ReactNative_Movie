@@ -1,5 +1,5 @@
 # ReactNative_Movie
-一款基於 TypeScript + MVVM + Dva(redux + react-router + redux-saga) 的電影時刻表 App。<br /><br />
+一款基於 TypeScript + MVVM + Dva (React-Router + Redux + Redux-saga) 的電影時刻表 App。<br /><br />
 Java版：[Java_Movie](https://github.com/WeirenZhang/Java_Movie)<br /><br />
 Kotlin版： [Kotlin_Movie](https://github.com/WeirenZhang/Kotlin_Movie)<br /><br />
 Flutter版：[Flutter_Movie](https://github.com/WeirenZhang/Flutter_Movie)<br /><br />
