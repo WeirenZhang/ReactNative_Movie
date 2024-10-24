@@ -7,19 +7,24 @@ import { RootState } from '@/model/dva/Models';
 import Toast from 'react-native-root-toast';
 import DOMParser from "advanced-html-parser";
 
-const MovieThisweek_URL = 'macros/s/AKfycbwwB2Ke85PFeQqt2P9BRZFOxWif6JI4_ImblPyfFlP-VTJLkJJ6sZkCMD4tPhF_g8yT/exec?type=MovieList&tab=0&page=';
+export function FormatString(str: string, ...val: string[]): string {
+  for (let index = 0; index < val.length; index++) {
+    str = str.replace(`{${index}}`, val[index]);
+  }
+  return str;
+}
 
-export interface IMovieThisweekModelState {
+export interface IMovieListModelState {
   dataList: IReleaseList[];
   refreshState: number;
   page: number;
 }
 
-export interface MovieThisweekModel extends Model {
-  namespace: 'movieThisweek';
-  state: IMovieThisweekModelState;
+export interface MovieListModel extends Model {
+  namespace: 'movieList';
+  state: IMovieListModelState;
   reducers: {
-    setState: Reducer<IMovieThisweekModelState>;
+    setState: Reducer<IMovieListModelState>;
   };
   effects: {
     onRefresh: Effect;
@@ -27,14 +32,14 @@ export interface MovieThisweekModel extends Model {
   };
 }
 
-const initialState: IMovieThisweekModelState = {
+const initialState: IMovieListModelState = {
   dataList: [],
   refreshState: RefreshState.Idle,
   page: 1,
 };
 
-const MovieThisweekModel: MovieThisweekModel = {
-  namespace: 'movieThisweek',
+const MovieListModel: MovieListModel = {
+  namespace: 'movieList',
   state: initialState,
   reducers: {
     setState(state = initialState, { payload }) {
@@ -45,7 +50,7 @@ const MovieThisweekModel: MovieThisweekModel = {
     },
   },
   effects: {
-    *onRefresh(_, { call, put }) {
+    *onRefresh({ payload }, { call, put }) {
       try {
         yield put({
           type: 'setState',
@@ -55,7 +60,7 @@ const MovieThisweekModel: MovieThisweekModel = {
         });
 
         const itemList: IReleaseList[] = [];
-        const { data } = yield call(axios.get, MovieThisweek_URL + 1);
+        const { data } = yield call(axios.get, FormatString("macros/s/AKfycbzNPN95_VIeYPTKF85yVS5oml_lUiVL0TUlQvuNj1krEUjUQFtBq_BY6eraap6zW2ZI/exec?type=MovieList&tab={0}&page={1}", payload.tab, "1"));
         /*
         if (data) {
           let doc = DOMParser.parse(data, {
@@ -117,12 +122,12 @@ const MovieThisweekModel: MovieThisweekModel = {
 
         let originList = [];
         if (payload && !payload.withRefresh) {
-          const { dataList } = yield select((state: RootState) => state.movieThisweek);
+          const { dataList } = yield select((state: RootState) => state.movieList);
           originList = dataList;
         }
 
         const itemList: IReleaseList[] = [];
-        const { data } = yield call(axios.get, MovieThisweek_URL + payload.page);
+        const { data } = yield call(axios.get, FormatString("macros/s/AKfycbzNPN95_VIeYPTKF85yVS5oml_lUiVL0TUlQvuNj1krEUjUQFtBq_BY6eraap6zW2ZI/exec?type=MovieList&tab={0}&page={1}", payload.tab, payload.page));
         /*
         if (data) {
           let doc = DOMParser.parse(data, {
@@ -180,4 +185,4 @@ const MovieThisweekModel: MovieThisweekModel = {
   },
 };
 
-export default MovieThisweekModel;
+export default MovieListModel;

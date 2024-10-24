@@ -4,7 +4,7 @@ import axios from 'axios';
 import { IMovieDateTab } from '@/model/MovieTime';
 import DOMParser from "advanced-html-parser";
 
-const MovieTime_URL = 'macros/s/AKfycbwwB2Ke85PFeQqt2P9BRZFOxWif6JI4_ImblPyfFlP-VTJLkJJ6sZkCMD4tPhF_g8yT/exec?type=MovieTime&movie_id=';
+const MovieTime_URL = 'macros/s/AKfycbzNPN95_VIeYPTKF85yVS5oml_lUiVL0TUlQvuNj1krEUjUQFtBq_BY6eraap6zW2ZI/exec?type=MovieTime&movie_id=';
 
 export interface IMovieTimeState {
   showLoading: boolean;

@@ -8,19 +8,26 @@ import { IReleaseList } from '@/model/ReleaseList';
 //import TitleItem from '@/components/TitleItem';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import EmptyView from '@/components/common/EmptyView';
+import { RootNavigation, RootStackParamList } from '@/navigator/Router';
+import { RouteProp } from '@react-navigation/native';
 
-const REFRESH_TYPE = 'movieThisweek/onRefresh';
-const LOAD_MORE_TYPE = 'movieThisweek/onLoadMore';
+const REFRESH_TYPE = 'movieList/onRefresh';
+const LOAD_MORE_TYPE = 'movieList/onLoadMore';
 
-const mapStateToProps = ({ movieThisweek }: RootState) => {
+const mapStateToProps = ({ movieList }: RootState) => {
   return {
-    dataList: movieThisweek.dataList,
-    refreshState: movieThisweek.refreshState,
-    page: movieThisweek.page,
+    dataList: movieList.dataList,
+    refreshState: movieList.refreshState,
+    page: movieList.page,
   };
 };
 
-function MovieThisweekPage() {
+interface IProps {
+  navigation: RootNavigation;
+  route: RouteProp<RootStackParamList, 'MovieListPage'>;
+}
+
+function movieListPage(props: IProps) {
   const dispatch = useDispatch();
   const { dataList, refreshState, page } = useSelector(
     mapStateToProps,
@@ -30,12 +37,18 @@ function MovieThisweekPage() {
   useEffect(() => {
     dispatch({
       type: REFRESH_TYPE,
+      payload: {
+        tab: props.route.params.item.tab,
+      },
     });
-  }, [dispatch]);
+  }, [dispatch, props.route.params.item.tab]);
 
   const onHeaderRefresh = () => {
     dispatch({
       type: REFRESH_TYPE,
+      payload: {
+        tab: props.route.params.item.tab,
+      },
     });
   };
 
@@ -47,6 +60,7 @@ function MovieThisweekPage() {
       type: LOAD_MORE_TYPE,
       payload: {
         page: page,
+        tab: props.route.params.item.tab,
       },
     });
   };
@@ -88,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MovieThisweekPage;
+export default movieListPage;

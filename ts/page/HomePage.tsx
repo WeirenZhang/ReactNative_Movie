@@ -12,24 +12,44 @@ import { IHome } from '@/model/Home';
 
 const data = [
   {
+    icon: require('@/assets/enl_2.png'),
+    title: "本周新片",
+    tab: "0"
+  },
+  {
     icon: require('@/assets/enl_1.png'),
-    title: "現正熱映"
+    title: "本期首輪",
+    tab: "1"
+  },
+  {
+    icon: require('@/assets/enl_1.png'),
+    title: "本期二輪",
+    tab: "2"
   },
   {
     icon: require('@/assets/enl_4.png'),
-    title: "即將上映"
+    title: "近期上映",
+    tab: "3"
+  },
+  {
+    icon: require('@/assets/enl_4.png'),
+    title: "新片快報",
+    tab: "4"
   },
   {
     icon: require('@/assets/enl_5.png'),
-    title: "電影院"
+    title: "電影院",
+    tab: "5"
   },
   {
     icon: require('@/assets/enl_3.png'),
-    title: "我的最愛"
+    title: "我的最愛",
+    tab: "6"
   },
   {
     icon: require('@/assets/enl_6.png'),
-    title: "網路訂票"
+    title: "網路訂票",
+    tab: "7"
   }
 ]
 
@@ -45,7 +65,7 @@ function HomePage(props: IProps) {
 
   const Item = ({ item, index }: { item: IHome; index: number }) => {
     return (
-      <TouchableOpacity activeOpacity={0.5} onPress={() => onPress(index)}>
+      <TouchableOpacity activeOpacity={0.5} onPress={() => onPress(item)}>
         <View style={styles.innerViewStyle}>
           <Image source={data[index].icon} style={styles.iconStyle} />
           <Text style={{ marginTop: 4 }}>{item.title} </Text>
@@ -54,23 +74,32 @@ function HomePage(props: IProps) {
     );
   };
 
-  const onPress = (index: number) => {
-    console.log('点击了第' + index + '个');
+  const onPress = (ihome: IHome) => {
+    console.log('点击了第' + ihome.tab + '个');
     const { navigation } = props;
-    switch (index) {
-      case 0:
-        navigation.navigate('MovieThisweekPage');
+    switch (ihome.tab) {
+      case "0":
+        navigation.navigate('MovieListPage', { item: ihome });
         break; /* 可选的 */
-      case 1:
-        navigation.navigate('MovieIntheatersPage');
+      case "1":
+        navigation.navigate('MovieListPage', { item: ihome });
         break; /* 可选的 */
-      case 2:
+      case "2":
+        navigation.navigate('MovieListPage', { item: ihome });
+        break; /* 可选的 */
+      case "3":
+        navigation.navigate('MovieListPage', { item: ihome });
+        break; /* 可选的 */
+      case "4":
+        navigation.navigate('MovieListPage', { item: ihome });
+        break; /* 可选的 */
+      case "5":
         navigation.navigate('TheaterAreaPage');
         break; /* 可选的 */
-      case 3:
+      case "6":
         navigation.navigate('MyFavouriteTabs');
         break; /* 可选的 */
-      case 4:
+      case "7":
         navigation.navigate('WebViewPage', { title: '網路訂票', url: 'https://www.ezding.com.tw/faq?comeFromApp=true&device=app' });
         break; /* 可选的 */
       /* 您可以有任意数量的 case 语句 */

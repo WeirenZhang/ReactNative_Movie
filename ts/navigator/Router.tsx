@@ -7,9 +7,7 @@ import {
 } from '@react-navigation/stack';
 import HomePage from '@/page/HomePage';
 import { Platform } from 'react-native';
-import MovieComingsoonPage from '@/page/Movie/MovieComingsoonPage';
-import MovieIntheatersPage from '@/page/Movie/MovieIntheatersPage';
-import MovieThisweekPage from '@/page/Movie/MovieThisweekPage';
+import MovieListPage from '@/page/Movie/MovieListPage';
 import MovieinfoMainTabs from '@/navigator/MovieinfoMainTabs';
 import TheaterAreaPage from '@/page/Theater/TheaterAreaPage';
 import TheaterListPage from '@/page/Theater/TheaterListPage';
@@ -30,13 +28,14 @@ import { IArea, ITheater } from '@/model/Area';
 import { IMovieTimeTab, IMovieTimeResult } from '@/model/MovieTime';
 import { IReleaseList } from '@/model/ReleaseList';
 import MovieTimeResultPage from '@/page/Movieinfo/MovieTimeResultPage';
+import { IHome } from '@/model/Home';
 
 //定义堆栈路由参数每一个页面的名称以及进入页面传递参数的类型
 export type RootStackParamList = {
   HomePage: undefined;
-  MovieComingsoonPage: undefined;
-  MovieIntheatersPage: undefined;
-  MovieThisweekPage: undefined;
+  MovieListPage: {
+    item: IHome;
+  };
   MovieinfoMainTabs: {
     item: IReleaseList;
   };
@@ -106,17 +105,9 @@ function RootStackScreen() {
         component={HomePage}
         options={{ title: '電影時刻表' }} />
       <Stack.Screen
-        name="MovieThisweekPage"
-        component={MovieThisweekPage}
-        options={{ title: '現正熱映' }} />
-      <Stack.Screen
-        name="MovieIntheatersPage"
-        component={MovieIntheatersPage}
-        options={{ title: '即將上映' }} />
-      <Stack.Screen
-        name="MovieComingsoonPage"
-        component={MovieComingsoonPage}
-        options={{ title: '即將上映' }} />
+        name="MovieListPage"
+        component={MovieListPage}
+        options={({ route }) => ({ title: route.params.item.title })} />
       <Stack.Screen
         name="MovieinfoMainTabs"
         component={MovieinfoMainTabs}

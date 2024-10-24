@@ -6,7 +6,7 @@ import { IArea } from '@/model/Area';
 import { ITheater } from '@/model/Area';
 import DOMParser from "advanced-html-parser";
 
-const Area_URL = 'macros/s/AKfycbwwB2Ke85PFeQqt2P9BRZFOxWif6JI4_ImblPyfFlP-VTJLkJJ6sZkCMD4tPhF_g8yT/exec?type=Area';
+const Area_URL = 'macros/s/AKfycbzNPN95_VIeYPTKF85yVS5oml_lUiVL0TUlQvuNj1krEUjUQFtBq_BY6eraap6zW2ZI/exec?type=Area';
 
 export interface IAreaState {
   refreshing: boolean;

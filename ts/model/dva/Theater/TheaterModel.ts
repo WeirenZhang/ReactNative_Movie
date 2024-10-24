@@ -5,7 +5,7 @@ import Toast from 'react-native-root-toast';
 import { IDateTheater, ITheater } from '@/model/Theater';
 import DOMParser from "advanced-html-parser";
 
-const Theater_URL = 'macros/s/AKfycbwwB2Ke85PFeQqt2P9BRZFOxWif6JI4_ImblPyfFlP-VTJLkJJ6sZkCMD4tPhF_g8yT/exec?type=TheaterResult&cinema_id=';
+const Theater_URL = 'macros/s/AKfycbzNPN95_VIeYPTKF85yVS5oml_lUiVL0TUlQvuNj1krEUjUQFtBq_BY6eraap6zW2ZI/exec?type=TheaterResult&cinema_id=';
 
 export interface ITheaterState {
   refreshing: boolean;

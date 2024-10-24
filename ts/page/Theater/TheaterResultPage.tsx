@@ -325,6 +325,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingLeft: 10,
     paddingRight: 10,
+    paddingBottom: 10,
   },
   dropdown: {
     height: 50,
