@@ -34,7 +34,7 @@ Objective-C版：[Objective-C_Movie](https://github.com/WeirenZhang/Objective-C_
 |![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/16.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/17.png)
 
 # 在 Google Play 上取得
-<a href="https://play.google.com/store/apps/details?id=com.weiren.zhang.ReactNative_Movie" target="_blank">
+<a href="https://play.google.com/store/apps/details?id=com.weiren.zhang.movie_react_native" target="_blank">
     <img
         alt="Get it on Google Play"
         src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
