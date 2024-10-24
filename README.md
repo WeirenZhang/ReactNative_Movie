@@ -1,25 +1,40 @@
 # ReactNative_Movie
+一款基於 Kotlin + MVVM + Jetpack + Coroutines 的電影時刻表 App 完整項目。<br /><br />
+Java版：[Java_Movie](https://github.com/WeirenZhang/Java_Movie)<br /><br />
+Kotlin版： [Kotlin_Movie](https://github.com/WeirenZhang/Kotlin_Movie)<br /><br />
+Flutter版：[Flutter_Movie](https://github.com/WeirenZhang/Flutter_Movie)<br /><br />
+Swift版：[Swift_Movie](https://github.com/WeirenZhang/Swift_Movie)<br /><br />
+Objective-C版：[Objective-C_Movie](https://github.com/WeirenZhang/Objective-C_Movie)<br /><br />
+喜歡的話希望給個 Star 或 Fork ^_^ ，謝謝<br /><br />
 
 # 專案截圖
 
-|首頁|現正熱映|即將上映|
+|首頁|本周新片|本期首輪|
 |:---:|:---:|:---:|
-|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.48.24.808.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.48.41.879.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.49.25.352.png)
+|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/1.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/2.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/3.png)
+
+|本期二輪|近期上映|新片快報|
+|:---:|:---:|:---:|
+|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/4.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/5.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/6.png)
 
 |電影資料|劇情簡介|播放時間|
 |:---:|:---:|:---:|
-|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.48.51.703.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.48.58.272.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.49.07.879.png)
+|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/7.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/8.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/9.png)
 
-|預告片|地區|電影院|
+|預告片|預告片|地區|
 |:---:|:---:|:---:|
-|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.49.14.871.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.49.34.96.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.49.40.696.png)
+|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/10.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/11.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/12.png)
 
-|播放時間|我的最愛|網路訂票|
+|電影院|播放時間|我的最愛|
 |:---:|:---:|:---:|
-|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.49.59.983.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-12_13.50.10.992.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/screenshot-2024-01-13_19.13.38.721.png)
+|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/13.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/14.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/15.png)
+
+|我的最愛|網路訂票|
+|:---:|:---:|
+|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/16.png)|![](https://github.com/WeirenZhang/ReactNative_Movie/blob/main/Screen/17.png)
 
 # 在 Google Play 上取得
-<a href="https://play.google.com/store/apps/details?id=com.weiren.zhang.movie_react_native" target="_blank">
+<a href="https://play.google.com/store/apps/details?id=com.weiren.zhang.ReactNative_Movie" target="_blank">
     <img
         alt="Get it on Google Play"
         src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
